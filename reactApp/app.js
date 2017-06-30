@@ -18,4 +18,36 @@ class ToDoList extends React.Component{
     )
   }
 }
-ReactDOM.render(<ToDoList dummyData ={dummyData} />, document.getElementById('root'));
+
+class InputLine extends React.Component{
+  constructor(props){
+    super(props);
+  }
+
+  render() {
+    return(
+      <div>
+        <input type='text' placeholder="task name..."></input>
+        <input type='submit' value="Add todo"></input>
+
+      </div>
+    )
+  }
+}
+
+class ToDoApp extends React.Component{
+  constructor(props){
+    super(props);
+  }
+
+  render() {
+    return(
+      <div>
+        <InputLine />
+        <ToDoList dummyData={this.props.dummyData}/>
+      </div>
+    )
+  }
+}
+
+ReactDOM.render(<ToDoApp dummyData ={dummyData} />, document.getElementById('root'));

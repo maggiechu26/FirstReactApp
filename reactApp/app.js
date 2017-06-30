@@ -1,7 +1,13 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-const dummyData = ['Piano', 'Violin', 'Harp', 'Fish'];
+const dummyData = [
+  {taskText: 'Piano', completed: false},
+  {taskText: 'Violin', completed:false},
+  {taskText: 'Harp', completed:false},
+  {taskText: 'Fish', completed:true}
+];
 
+console.log(dummyData);
 
 class ToDoList extends React.Component{
   constructor(props) {
@@ -12,7 +18,12 @@ class ToDoList extends React.Component{
     return(
       <div>
         <ul>
-          {this.props.dummyData.map((task) => <li><input type='submit' value='X'></input> {task} </li> )}
+          {this.props.dummyData.map((task) =>
+          <li>
+            <input type='submit' value='X'></input>
+            {task.completed ? <strike>{task.taskText}</strike> : task.taskText}
+          </li>
+        )}
         </ul>
       </div>
     )

@@ -9,6 +9,21 @@ const dummyData = [
 
 console.log(dummyData);
 
+class Todo extends React.Component{
+  constructor(props){
+    super(props);
+  }
+
+  render(){
+    return(
+      <li>
+        <input type='submit' value='X'></input>
+        {this.props.task.completed ? <strike>{this.props.task.taskText}</strike> : this.props.task.taskText}
+      </li>
+    )
+  }
+}
+
 class ToDoList extends React.Component{
   constructor(props) {
     super(props);
@@ -18,11 +33,8 @@ class ToDoList extends React.Component{
     return(
       <div>
         <ul>
-          {this.props.dummyData.map((task) =>
-          <li>
-            <input type='submit' value='X'></input>
-            {task.completed ? <strike>{task.taskText}</strike> : task.taskText}
-          </li>
+          {this.props.todos.map((task) =>
+            <Todo task={task}/>
         )}
         </ul>
       </div>
@@ -49,13 +61,22 @@ class InputLine extends React.Component{
 class ToDoApp extends React.Component{
   constructor(props){
     super(props);
+    this.state = {
+      todos: []
+    }
+  }
+
+  componentDidMount(){
+    this.setState({
+      todos: this.props.dummyData
+    })
   }
 
   render() {
     return(
       <div>
         <InputLine />
-        <ToDoList dummyData={this.props.dummyData}/>
+        <ToDoList todos={this.state.todos}/>
       </div>
     )
   }
